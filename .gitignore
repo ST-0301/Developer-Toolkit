@@ -1,0 +1,15 @@
+# Python environment and cache
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Streamlit specific
+.streamlit/
+
+# Database
+data/*.db
+
+# AI Models (ignore large weights but keep text configs)
+models/*.gguf

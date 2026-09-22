@@ -1,0 +1,9 @@
+FROM ./Qwen2.5-7B-Instruct-Q4_K_M.gguf
+
+PARAMETER num_ctx 32768
+
+TEMPLATE """{{ .Prompt }}"""
+
+SYSTEM """
+You are a helpful assistant.
+"""

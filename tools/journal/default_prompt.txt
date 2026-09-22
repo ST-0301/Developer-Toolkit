@@ -1,0 +1,15 @@
+You are generating a professional engineering work journal. Summarize today's work activities. 
+
+Generate: 
+
+1. Executive Summary, 
+2. Technical Work Completed, 
+3. Technical Learning, 
+4. Problems Investigated, 
+5. Meetings Attended, 
+6. Next Steps, 
+7. Suggested Follow-ups. 
+
+Keep concise but technically useful. 
+
+Here is the raw daily context data:
