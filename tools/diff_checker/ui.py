@@ -1,3 +1,5 @@
+import difflib
+import json
 import streamlit as st
 import streamlit.components.v1 as components
 import time
@@ -16,11 +18,30 @@ def render(navigate_to):
         
     st.divider()
 
+    # Allowed file types for drag and drop
+    allowed_types = ["cs", "cshtml", "txt", "py"]
+
     col_orig, col_upd = st.columns(2)
+    
     with col_orig:
-        original_text = st.text_area("Original Code", height=300, key="orig_code")
+        st.markdown("**Original Code**")
+        orig_file = st.file_uploader("Upload original file", type=allowed_types, key="orig_file", label_visibility="collapsed")
+        
+        # If a file is dropped/uploaded, read its content into session state
+        if orig_file is not None:
+            st.session_state["orig_code"] = orig_file.read().decode("utf-8")
+            
+        original_text = st.text_area("Original Code Text", height=250, key="orig_code", label_visibility="collapsed")
+
     with col_upd:
-        updated_text = st.text_area("Updated Code", height=300, key="upd_code")
+        st.markdown("**Updated Code**")
+        upd_file = st.file_uploader("Upload updated file", type=allowed_types, key="upd_file", label_visibility="collapsed")
+        
+        # If a file is dropped/uploaded, read its content into session state
+        if upd_file is not None:
+            st.session_state["upd_code"] = upd_file.read().decode("utf-8")
+            
+        updated_text = st.text_area("Updated Code Text", height=250, key="upd_code", label_visibility="collapsed")
 
     # Filters & Actions Layout Adjusted
     col_filters, col_theme, col_blank, col_btn = st.columns([2, 2, 1.5, 2])
@@ -45,7 +66,7 @@ def render(navigate_to):
 
     if compare_clicked:
         if not original_text and not updated_text:
-            st.warning("Please paste code into both boxes to compare.")
+            st.warning("Please paste code or upload files into both boxes to compare.")
         else:
             start_total = time.perf_counter()
 
